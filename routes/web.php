@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/financial-owe', 'FinancialOweController@show');
+
+Route::get('/financial-debt', 'FinancialDebtController@show');
+
+Route::get('/item-buy', 'ItemBuyController@show');
+
+Route::get('/item-history', 'ItemHistoryController@show');
