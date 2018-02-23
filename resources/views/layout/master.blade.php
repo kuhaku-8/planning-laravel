@@ -137,7 +137,7 @@
             @yield('menu')
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">KEUANGAN</li>
-                <li><a href="#"><i class="fa fa-balance-scale"></i><span>Dimiliki</span></a></li>
+                <li><a href="/financial"><i class="fa fa-balance-scale"></i><span>Dimiliki</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-users"></i><span>Daftar Yang Berhutang</span>
                         <span class="pull-right-container">
@@ -307,8 +307,9 @@
             // //Timepicker
             // $('.timepicker').timepicker({
             //     showInputs: false
-            })
+
         })
     </script>
+    @yield('footer')
 </body>
 </html>

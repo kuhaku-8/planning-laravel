@@ -46,6 +46,7 @@
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
+                        {{ csrf_field() }}
                         </thead>
                         <tbody>
                         @foreach ($itembuy as $tampil)
@@ -57,7 +58,7 @@
                                     <table width="90">
                                         <tr>
                                             <td>Rp</td>
-                                            <td align="right">{{$tampil->harga}}</td>
+                                            <td align="right">{{number_format($tampil->harga,0,',','.')}}</td>
                                         </tr>
                                     </table>
                                 </td>
@@ -65,12 +66,16 @@
                                     <table width="90">
                                         <tr>
                                             <td>Rp</td>
-                                            <td align="right">{{$tampil->harga*$tampil->qty}}</td>
+                                            <td align="right">{{number_format($tampil->harga*$tampil->qty,0,',','.')}}</td>
                                         </tr>
                                     </table>
                                 </td>
                                 <td>
-
+                                    @if(($tampil->harga*$tampil->qty)<Auth::user()->saldo_tunai)
+                                        <b>Dapat Dibeli!</b>
+                                    @else
+                                        Saldo Kurang Rp {{number_format(($tampil->harga*$tampil->qty)-Auth::user()->saldo_tunai,0,',','.')}}
+                                    @endif
                                 </td>
                                 <td>
                                     <div class="btn-group">
@@ -98,4 +103,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer')
+
 @endsection

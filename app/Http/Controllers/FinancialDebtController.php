@@ -14,7 +14,7 @@ class FinancialDebtController extends Controller
         $this->middleware('auth');
     }
 
-    public function show(){
+    public function index(){
         $financialdebt=FinancialDebt::all();
         $no=1;
         //dd($itemhistory);

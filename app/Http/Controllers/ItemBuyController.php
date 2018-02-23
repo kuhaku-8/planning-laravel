@@ -14,7 +14,7 @@ class ItemBuyController extends Controller
         $this->middleware('auth');
     }
 
-    public function show(){
+    public function index(){
       $itembuy=ItemBuy::orderBy('harga', 'asc')->get();
       $no=1;
       //dd($itemhistory);

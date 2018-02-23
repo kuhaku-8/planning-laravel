@@ -20,7 +20,6 @@
 @endsection
 
 @section('content')
-
     <!-- Default box -->
     <div class="box">
         <div class="box-header with-border">
@@ -32,7 +31,7 @@
                 <!-- small box -->
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <h3>Rp</h3>
+                        <h3>Rp {{number_format(Auth::user()->saldo_tunai+$total,0,',','.')}}</h3>
                         <p>Total Keseluruhan</p>
                     </div>
                     <div class="icon">
@@ -48,8 +47,8 @@
                     <div class="inner">
                         <h3>53<sup style="font-size: 20px">%</sup></h3>
                         <p>
-                            @if(Auth::user()->saldo_tunai>$item_check->harga)
-                                {{$item_check->nama}}
+                            @if(Auth::user()->saldo_tunai>$item->harga)
+                                {{$item->nama}}
                             @else
                                 Tidak Ada!
                             @endif

@@ -14,7 +14,7 @@ class ItemHistoryController extends Controller
         $this->middleware('auth');
     }
 
-    public function show(){
+    public function index(){
       $itemhistory=ItemHistory::all();
       $no=1;
       return view('/application/itemhistory',['itemhistory'=>$itemhistory,'no'=>$no]);

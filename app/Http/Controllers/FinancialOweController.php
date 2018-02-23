@@ -14,7 +14,7 @@ class FinancialOweController extends Controller
         $this->middleware('auth');
     }
 
-    public function show(){
+    public function index(){
         $financialowe=FinancialOwe::all();
         $no=1;
         //dd($itemhistory);
