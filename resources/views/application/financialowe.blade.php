@@ -4,6 +4,13 @@
     Daftar Yang Berhutang
 @endsection
 
+@section('header')
+    <!-- DataTables -->
+    <link rel="stylesheet" href="/dashboard/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="/dashboard/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+@endsection
+
 @section('menu')
 
 @endsection
@@ -49,18 +56,18 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($financialowe as $tampil)
+                        @foreach ($financialowes as $financialowe)
                         <tr>
                             <td>{{$no++}}</td>
-                            <td>{{$tampil->nama_yang_hutang}}</td>
-                            <td>{{$tampil->status_yang_hutang}}</td>
-                            <td>{{$tampil->tanggal_yang_hutang}}</td>
-                            <td>{{$tampil->jumlah_yang_hutang}}</td>
-                            <td>{{$tampil->sisa_yang_hutang}}<td>
+                            <td>{{$financialowe->name}}</td>
+                            <td>{{$financialowe->status}}</td>
+                            <td>{{$financialowe->date}}</td>
+                            <td>{{$financialowe->total}}</td>
+                            <td>{{$financialowe->balance}}<td>
                                 <div class="btn-group">
-                                    <a href="./financial_owe_update.php?id={{$tampil->id_yang_hutang}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> &nbspEdit</a>
-                                    <a href="./financial_owe_delete.php?id={{$tampil->id_yang_hutang}}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Ingin Menghapus {{$tampil->nama_yang_hutang}}?')"><i class="fa fa-trash"></i> &nbspDelete</a>
-                                    <a href="./financial_owe_move.php?id={{$tampil->id_yang_hutang}}" class="btn btn-success btn-sm" onclick="return confirm('Yakin {{$tampil->nama_yang_hutang}} Sudah Lunas?')"><i class="fa fa-share"></i> &nbspMove</a>
+                                    <a href="./financial_owe_update.php?id={{$financialowe->id}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> &nbspEdit</a>
+                                    <a href="./financial_owe_delete.php?id={{$financialowe->id}}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Ingin Menghapus {{$financialowe->name}}?')"><i class="fa fa-trash"></i> &nbspDelete</a>
+                                    <a href="./financial_owe_move.php?id={{$financialowe->id}}" class="btn btn-success btn-sm" onclick="return confirm('Yakin {{$financialowe->name}} Sudah Lunas?')"><i class="fa fa-share"></i> &nbspMove</a>
                                 </div>
                             </td>
                         </tr>
@@ -86,4 +93,39 @@
         <!-- /.col -->
     </div>
     <!-- /.row -->
+@endsection
+
+@section('footer')
+    <!-- bootstrap datepicker -->
+    <script src="/dashboard/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <!-- DataTables -->
+    <script src="/dashboard/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/dashboard/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <!-- InputMask -->
+    <script src="/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+    <script>
+        $(function () {
+            $('#example1').DataTable()
+            $('#example2').DataTable({
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : false,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false
+            })
+        })
+    </script>
+    <!-- Page script -->
+    <script>
+        $(function () {
+            //Date picker
+            $('#datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+            })
+        })
+    </script>
 @endsection

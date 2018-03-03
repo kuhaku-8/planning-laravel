@@ -15,9 +15,8 @@ class FinancialOweController extends Controller
     }
 
     public function index(){
-        $financialowe=FinancialOwe::all();
+        $financialowes=FinancialOwe::all();
         $no=1;
-        //dd($itemhistory);
-        return view('/application/financialowe',['financialowe'=>$financialowe,'no'=>$no]);
+        return view('/application/financialowe',['financialowes'=>$financialowes,'no'=>$no]);
     }
 }

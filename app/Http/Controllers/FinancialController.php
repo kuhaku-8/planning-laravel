@@ -20,19 +20,19 @@ class FinancialController extends Controller
         $debts=FinancialDebt::all();
         $countdebt=0;
         foreach ($debts as $debt) {
-            $countdebt+=$debt->jumlah_berhutang;
+            $countdebt+=($debt->total-$debt->balance);
         }
 
         $owes=FinancialOwe::all();
         $countowe=0;
         foreach ($owes as $owe) {
-            $countowe+=$owe->sisa_yang_hutang;
+            $countowe+=$owe->balance;
         }
 
         $haves=ItemHistory::all();
         $counthave=0;
         foreach ($haves as $have){
-            $counthave+=$have->harga*$have->qty;
+            $counthave+=$have->price*$have->qty;
         }
 
         return view('application/financial',['totaldebt'=>$countdebt,'totalowe'=>$countowe,'totalhave'=>$counthave]);

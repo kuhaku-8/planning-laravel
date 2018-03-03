@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\FinancialOwe;
 use App\Model\FinancialDebt;
 use App\Model\ItemBuy;
+use App\Model\ItemHistory;
 
 class HomeController extends Controller
 {
@@ -31,7 +32,7 @@ class HomeController extends Controller
         $countdebt=0;
         $debtcount=0;
         foreach ($debts as $debt) {
-            $countdebt+=$debt->jumlah_berhutang;
+            $countdebt+=($debt->total-$debt->balance);
             $debtcount++;
         }
 
@@ -39,14 +40,16 @@ class HomeController extends Controller
         $countowe=0;
         $owecount=0;
         foreach ($owes as $owe) {
-            $countowe+=$owe->sisa_yang_hutang;
+            $countowe+=$owe->balance;
             $owecount++;
         }
 
         $total=$countowe-$countdebt;
 
-        $item_check = ItemBuy::orderBy('harga', 'asc')->first();
+        $itemhistorys = ItemHistory::orderby('id','desc')->get();
+        $itembuys = ItemBuy::orderBy('price', 'asc')->get();
+        $no=1;
 
-        return view('home',['debt'=>$debtcount,'owe'=>$owecount,'item'=>$item_check,'total'=>$total]);
+        return view('home',['debt'=>$debtcount,'owe'=>$owecount,'total'=>$total,'itembuys'=>$itembuys,'itemhistorys'=>$itemhistorys,'nobuy'=>$no,'nohistory'=>$no]);
     }
 }

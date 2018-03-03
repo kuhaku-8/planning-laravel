@@ -21,6 +21,6 @@ Route::get('/financial-owe', 'FinancialOweController@index');
 
 Route::get('/financial-debt', 'FinancialDebtController@index');
 
-Route::get('/item-buy', 'ItemBuyController@index');
+Route::resource('/item-buy', 'ItemBuyController');
 
 Route::get('/item-history', 'ItemHistoryController@index');

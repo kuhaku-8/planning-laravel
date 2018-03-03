@@ -9,9 +9,7 @@
     <link rel="stylesheet" href="/dashboard/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/dashboard/Ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" href="/other/css.css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <link href='pictures/ico.png' rel='icon' type='image/x-icon'/>
 </head>
 <body class="hold-transition login-page">
@@ -42,11 +40,11 @@
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                        </label>
-                    </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                    </label>
+                </div>
             </div>
             <div class="row">
                 <div class="col-xs-8"></div>
@@ -57,7 +55,6 @@
         </form>
     </div>
 </div>
-
 <script src="/dashboard/jquery/dist/jquery.min.js"></script>
 <script src="/dashboard/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>

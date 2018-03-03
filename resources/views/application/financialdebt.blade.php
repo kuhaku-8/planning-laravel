@@ -4,6 +4,13 @@
     Daftar Hutang
 @endsection
 
+@section('header')
+    <!-- DataTables -->
+    <link rel="stylesheet" href="/dashboard/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="/dashboard/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+@endsection
+
 @section('menu')
 
 @endsection
@@ -49,24 +56,24 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($financialdebt as $tampil)
+                        @foreach ($financialdebts as $financialdebt)
                         <tr>
                             <td>{{$no++}}</td>
-                            <td>{{$tampil->nama_berhutang}}</td>
-                            <td>{{$tampil->status_berhutang}}</td>
-                            <td>{{$tampil->tanggal_berhutang}}</td>
+                            <td>{{$financialdebt->name}}</td>
+                            <td>{{$financialdebt->status}}</td>
+                            <td>{{$financialdebt->date}}</td>
                             <td>
-                                {{$tampil->jumlah_berhutang}}
+                                {{$financialdebt->total}}
                             </td>
                             <td>
-                                {{$tampil->sisa_berhutang}}
+                                {{$financialdebt->balance}}
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="./financial_debt_update.php?id={{$tampil->id_berhutang}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> &nbspUbah</a>
-                                    <a href="./financial_debt_delete.php?id={{$tampil->id_berhutang}}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Ingin Menghapus {{$tampil->nama_berhutang}}?')"><i class="fa fa-trash"></i> &nbspHapus</a>
-                                    <a href="./financial_debt_pay.php?id={{$tampil->id_berhutang}}" class="btn btn-info btn-sm"><i class="fa fa-bookmark"></i> &nbspCicil</a>
-                                    <a href="./financial_debt_move.php?id={{$tampil->id_berhutang}}" class="btn btn-success btn-sm" onclick="return confirm('Yakin {{$tampil->nama_berhutang}} Sudah Lunas?')"><i class="fa fa-share"></i> &nbspSudah Lunas</a>
+                                    <a href="./financial_debt_update.php?id={{$financialdebt->id}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> &nbspUbah</a>
+                                    <a href="./financial_debt_delete.php?id={{$financialdebt->id}}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Ingin Menghapus {{$financialdebt->name}}?')"><i class="fa fa-trash"></i> &nbspHapus</a>
+                                    <a href="./financial_debt_pay.php?id={{$financialdebt->id}}" class="btn btn-info btn-sm"><i class="fa fa-bookmark"></i> &nbspCicil</a>
+                                    <a href="./financial_debt_move.php?id={{$financialdebt->id}}" class="btn btn-success btn-sm" onclick="return confirm('Yakin {{$financialdebt->name}} Sudah Lunas?')"><i class="fa fa-share"></i> &nbspSudah Lunas</a>
                                 </div>
                             </td>
                         </tr>
@@ -91,4 +98,39 @@
         <!-- /.col -->
     </div>
     <!-- /.row -->
+@endsection
+
+@section('footer')
+    <!-- bootstrap datepicker -->
+    <script src="/dashboard/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <!-- DataTables -->
+    <script src="/dashboard/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/dashboard/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <!-- InputMask -->
+    <script src="/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+    <script>
+        $(function () {
+            $('#example1').DataTable()
+            $('#example2').DataTable({
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : false,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false
+            })
+        })
+    </script>
+    <!-- Page script -->
+    <script>
+        $(function () {
+            //Date picker
+            $('#datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+            })
+        })
+    </script>
 @endsection

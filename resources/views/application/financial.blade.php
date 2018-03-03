@@ -23,91 +23,110 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion ion-cash"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Uang Cash</span>
+                    <span class="info-box-number">Rp {{number_format(Auth::user()->cash,0,',','.')}}</span>
+                    {{--<span class="info-box-more">Tambah Kurangi</span>--}}
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <!-- /.info-box -->
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="fa fa-paypal"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Uang Paypal</span>
+                    <span class="info-box-number">USD {{Auth::user()->paypal}}</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion ion-card"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Total Uang ATM</span>
+                    <span class="info-box-number">Rp {{number_format(Auth::user()->atm,0,',','.')}}</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <!-- /.info-box -->
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion ion-android-cart"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Total Habis</span>
+                    <span class="info-box-number">Rp {{number_format($totalhave,0,',','.')}}</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+    </div>
+    <div class="row">
+        <section class="col-lg-8 connectedSortable">
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="nav-tabs-custom">
+                <!-- Tabs within a box -->
+                <ul class="nav nav-tabs pull-right">
+                    <li class="active"><a href="#table-sell" data-toggle="tab">Area</a></li>
+                    <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
+                    <li class="pull-left header"><i class="fa fa-inbox"></i> Penjualan</li>
+                </ul>
+                <div class="tab-content no-padding">
+                    <!-- Morris chart - Sales -->
+                    <div class="chart tab-pane active" id="#table-sell" style="position: relative; height: 300px;"></div>
+                    <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
+                </div>
+            </div>
+        </section>
+        <section class="col-lg-4 connectedSortable">
             <!-- DONUT CHART -->
-            <div class="box">
+            <div class="box box-info">
                 <div class="box-header with-border">
                     <h3 class="box-title">Grafik Keuangan</h3>
 
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                     </div>
                 </div>
-                <div class="box-body">
-                    <canvas id="pieChart" style="height:250px"></canvas>
-                </div>
-                <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-        </div>
-        <div class="col-md-6">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title"></h3>
-
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    </div>
-                </div>
+                <!-- /.box-header -->
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-aqua"><i class="ion ion-cash"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Uang Cash</span>
-                                    <span class="info-box-number">Rp {{number_format(Auth::user()->saldo_tunai,0,',','.')}}</span>
-                                    {{--<span class="info-box-more">Tambah Kurangi</span>--}}
-                                </div>
-                                <!-- /.info-box-content -->
+                        <div>
+                            <div class="chart-responsive">
+                                <canvas id="pieChart" height="250"></canvas>
                             </div>
+                            <!-- ./chart-responsive -->
                         </div>
-                        <div class="col-md-6">
-                            <!-- /.info-box -->
-                            <div class="info-box">
-                                <span class="info-box-icon bg-aqua"><i class="fa fa-paypal"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Uang Paypal</span>
-                                    <span class="info-box-number">USD {{Auth::user()->saldo_paypal}}</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
-                        </div>
+                        <!-- /.col -->
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-aqua"><i class="ion ion-card"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Total Uang ATM</span>
-                                    <span class="info-box-number">Rp {{number_format(Auth::user()->saldo_atm,0,',','.')}}</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <!-- /.info-box -->
-                            <div class="info-box">
-                                <span class="info-box-icon bg-aqua"><i class="ion ion-android-cart"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Total Habis</span>
-                                    <span class="info-box-number">Rp {{number_format($totalhave,0,',','.')}}</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
-                        </div>
-                    </div>
+                    <!-- /.row -->
                 </div>
                 <!-- /.box-body -->
+                <div class="box-footer no-padding">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="#">Saldo Dimiliki <span class="pull-right text-aqua"> Rp {{number_format(Auth::user()->cash+Auth::user()->atm+(floor(Auth::user()->paypal)*Auth::user()->conversion),0,',','.')}}</span></a></li>
+                        <li><a href="#">Yang Hutang <span class="pull-right text-yellow"><i class="fa fa-angle-up"></i> Rp {{number_format($totalowe,0,',','.')}}</span></a></li>
+                        <li><a href="#">Hutang <span class="pull-right text-red"><i class="fa fa-angle-down"></i> Rp {{number_format($totaldebt,0,',','.')}}</span></a></li>
+                    </ul>
+                </div>
+                <!-- /.footer -->
             </div>
             <!-- /.box -->
-        </div>
+        </section>
     </div>
 @endsection
 
@@ -125,22 +144,28 @@
             var pieChart       = new Chart(pieChartCanvas)
             var PieData        = [
                 {
+                    value    : {{Auth::user()->cash+Auth::user()->atm+(floor(Auth::user()->paypal)*Auth::user()->conversion)}},
+                    color    : '#00c0ef',
+                    highlight: '#00c0ef',
+                    label    : 'Saldo Dimiliki '
+                },
+                // {
+                //     value    : ,
+                //     color    : '#00a65a',
+                //     highlight: '#00a65a',
+                //     label    : 'Keuntungan '
+                // },
+                {
+                    value    : {{$totalowe}},
+                    color    : '#f39c12',
+                    highlight: '#f39c12',
+                    label    : 'Yang Berhutang '
+                },
+                {
                     value    : {{$totaldebt}},
                     color    : '#f56954',
                     highlight: '#f56954',
                     label    : 'Hutang '
-                },
-                {
-                    value    : {{Auth::user()->saldo_tunai}},
-                    color    : '#00a65a',
-                    highlight: '#00a65a',
-                    label    : 'Saldo Tunai '
-                },
-                {
-                    value    : {{$totalowe}},
-                    color    : '#00c0ef',
-                    highlight: '#00c0ef',
-                    label    : 'Yang Berhutang '
                 }
             ]
             var pieOptions     = {

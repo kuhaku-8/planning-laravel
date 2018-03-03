@@ -15,9 +15,9 @@ class FinancialDebtController extends Controller
     }
 
     public function index(){
-        $financialdebt=FinancialDebt::all();
+        $financialdebts=FinancialDebt::all();
         $no=1;
         //dd($itemhistory);
-        return view('/application/financialdebt',['financialdebt'=>$financialdebt,'no'=>$no]);
+        return view('/application/financialdebt',['financialdebts'=>$financialdebts,'no'=>$no]);
     }
 }

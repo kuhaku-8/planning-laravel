@@ -15,8 +15,8 @@ class ItemHistoryController extends Controller
     }
 
     public function index(){
-      $itemhistory=ItemHistory::all();
+      $itemhistorys=ItemHistory::all();
       $no=1;
-      return view('/application/itemhistory',['itemhistory'=>$itemhistory,'no'=>$no]);
+      return view('/application/itemhistory',['itemhistorys'=>$itemhistorys,'no'=>$no]);
     }
 }
