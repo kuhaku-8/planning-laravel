@@ -1,0 +1,14 @@
+table {
+    counter-reset: rowCounter;
+    border-collapse: collapse;
+}
+
+tr td.no:first-child {
+    counter-increment: rowCounter;
+}
+
+td.no:first-child::before {
+    content: counter(rowCounter);
+    /*margin: 0 0.5em 0 0;*/
+    /*padding: 0 0.5em;*/
+}

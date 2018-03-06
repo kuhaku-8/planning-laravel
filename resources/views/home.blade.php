@@ -152,7 +152,7 @@
                         </thead>
                         <tbody>
                         @foreach ($itemhistorys as $itemhistory)
-                            @if($nohistory<4)
+                            @if($nohistory<$nobuy)
                                 <tr>
                                     <td>{{$nohistory++}}</td>
                                     <td>{{$itemhistory->name}}</td>

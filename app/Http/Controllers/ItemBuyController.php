@@ -26,9 +26,7 @@ class ItemBuyController extends Controller
 
     public function index(){
       $itembuys=ItemBuy::orderBy('price', 'asc')->get();
-      $no=1;
-      //dd($itemhistory);
-      return view('application.itembuy',['itembuys'=>$itembuys,'no'=>$no]);
+      return view('application.itembuy',['itembuys'=>$itembuys]);
     }
 
     public function store(Request $request)

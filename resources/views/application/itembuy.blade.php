@@ -8,6 +8,7 @@
     <!-- bootstrap datepicker -->
     <link rel="stylesheet" href="/dashboard/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="/other/toastr.min.css">
+    <link rel="stylesheet" href="/other/numbering.css">
     <script type="text/javascript">
         function status(a,b){
             if(a>b){
@@ -46,7 +47,7 @@
                     <h3 class="box-title">List Barang</h3>
                 </div>
                 <div class="box-body">
-                    <button type="reset" class="add-modal btn btn-info" data-toggle="modal">
+                    <button type="button" class="add-modal btn btn-info" data-toggle="modal">
                         <i class="fa fa-cart-plus"></i> &nbspTambah
                     </button>
                 </div>
@@ -55,20 +56,20 @@
                     <table id="itembuy" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="25">No</th>
                             <th>Nama</th>
                             <th>Qty</th>
                             <th>Harga</th>
                             <th>Jumlah</th>
                             <th>Status</th>
-                            <th>Aksi</th>
+                            <th width="245">Aksi</th>
                         </tr>
                         {{ csrf_field() }}
                         </thead>
                         <tbody>
                         @foreach ($itembuys as $itembuy)
                             <tr class="item-{{$itembuy->id}}">
-                                <td>{{$no++}}</td>
+                                <td class="no"></td>
                                 <td>{{$itembuy->name}}</td>
                                 <td>{{$itembuy->qty}}</td>
                                 <td>
@@ -93,13 +94,13 @@
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <button class="edit-modal btn btn-warning" data-no="{{$no-1}}" data-id="{{$itembuy->id}}" data-name="{{$itembuy->name}}" data-price="{{$itembuy->price}}" data-qty="{{$itembuy->qty}}">
+                                        <button class="edit-modal btn btn-warning btn-sm" data-id="{{$itembuy->id}}" data-name="{{$itembuy->name}}" data-price="{{$itembuy->price}}" data-qty="{{$itembuy->qty}}">
                                             <i class="fa fa-edit"></i> Ubah
                                         </button>
-                                        <button class="delete-modal btn btn-danger" data-id="{{$itembuy->id}}" data-name="{{$itembuy->name}}" data-price="{{$itembuy->price}}" data-qty="{{$itembuy->qty}}">
+                                        <button class="delete-modal btn btn-danger btn-sm" data-id="{{$itembuy->id}}" data-name="{{$itembuy->name}}" data-price="{{$itembuy->price}}" data-qty="{{$itembuy->qty}}">
                                             <i class="fa fa-trash"></i> Hapus
                                         </button>
-                                        <button class="move-modal btn btn-success" data-id="{{$itembuy->id}}" data-name="{{$itembuy->name}}" data-price="{{$itembuy->price}}" data-qty="{{$itembuy->qty}}">
+                                        <button class="move-modal btn btn-success btn-sm" data-id="{{$itembuy->id}}" data-name="{{$itembuy->name}}" data-price="{{$itembuy->price}}" data-qty="{{$itembuy->qty}}">
                                             <i class="fa fa-share"></i> Sudah Dibeli
                                         </button>
                                     </div>
@@ -196,7 +197,6 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-inbox"></i>
                                 </div>
-                                <input type="hidden" id="no_edit" disabled>
                                 <input type="hidden" id="id_edit" disabled>
                                 <input type="text" class="form-control" id="name_edit" value="" autocomplete="off" autofocus>
                             </div>
@@ -302,7 +302,7 @@
                 <form role="form" action="#" method="post" id="moveform">
                     <div class="modal-body">
                         <div class="form-group">
-                            <h4 class="text-center">Apakah Anda Yakin Ingin Sudah Membeli Barang Ini?</h4>
+                            <h4 class="text-center">Apakah Anda Yakin Sudah Membeli Barang Ini?</h4>
                         </div>
                         <div class="form-group">
                             <label for="name">Nama Barang</label>
@@ -366,14 +366,6 @@
     <script type="text/javascript" src="/other/toastr.min.js"></script>
     <script>
         $(function () {
-            $('#itembuy').DataTable({
-                'paging'      : true,
-                'lengthChange': false,
-                'searching'   : false,
-                'ordering'    : false,
-                'info'        : false,
-                'autoWidth'   : false
-            });
             //Date picker
             $('#datepicker').datepicker({
                 format: 'yyyy-mm-dd',
@@ -425,7 +417,7 @@
                         }
                     } else {
                         toastr.success('Barang Ditambahkan!', 'Berhasil!', {timeOut: 5000});
-                        $('#itembuy').append("<tr class='item-" + data.id + "'><td>{{$no++}}</td><td>" + data.name + "</td><td>" + data.qty + "</td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price + "</td></tr></table></td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price*data.qty + "</td></tr></table></td><td><script>document.getElementById('st-" + data.id + "').innerHTML = status(" + data.price*data.qty + ",{{Auth::user()->cash+Auth::user()->atm}});</\script><p id='st-" + data.id + "'></p></td><td><div class='btn-group'><button class='edit-modal btn btn-warning' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-edit'></i> Ubah</button><button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-trash'></i> Hapus</button><button class='move-modal btn btn-success' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-share'></i> Sudah Dibeli</button></div></td></tr>");
+                        $('#itembuy').append("<tr class='item-" + data.id + "'><td class='no'></td><td>" + data.name + "</td><td>" + data.qty + "</td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price + "</td></tr></table></td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price*data.qty + "</td></tr></table></td><td><script>document.getElementById('st-" + data.id + "').innerHTML = status(" + data.price*data.qty + ",{{Auth::user()->cash+Auth::user()->atm}});</\script><p id='st-" + data.id + "'></p></td><td><div class='btn-group'><button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-edit'></i> Ubah</button><button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-trash'></i> Hapus</button><button class='move-modal btn btn-success btn-sm' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-share'></i> Sudah Dibeli</button></div></td></tr>");
                         $("#addform")[0].reset();
                     }
                 },
@@ -446,12 +438,10 @@
         // Edit
         $(document).on('click', '.edit-modal', function() {
             $('#id_edit').val($(this).data('id'));
-            $('#no_edit').val($(this).data('no'));
             $('#name_edit').val($(this).data('name'));
             $('#price_edit').val($(this).data('price'));
             $('#qty_edit').val($(this).data('qty'));
             id = $('#id_edit').val();
-            no = $('#no_edit').val();
             $('#editModal').modal('show');
         });
         $('.modal-footer').on('click', '.edit', function() {
@@ -490,7 +480,7 @@
                         }
                     } else {
                         toastr.success('Successfully updated Post!', 'Success Alert', {timeOut: 5000});
-                        $('.item-' + data.id).replaceWith("<tr class='item-" + data.id + "'><td>" + no + "</td><td>" + data.name + "</td><td>" + data.qty + "</td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price + "</td></tr></table></td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price*data.qty + "</td></tr></table><td><script>document.getElementById('st-" + data.id + "').innerHTML = status(" + data.price*data.qty + ",{{Auth::user()->cash+Auth::user()->atm}});</\script><p id='st-" + data.id + "'></p></td><td><div class='btn-group'><button class='edit-modal btn btn-warning' data-num='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-edit'></i> Ubah</button><button class='delete-modal btn btn-danger' data-no='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-trash'></i> Hapus</button><button class='move-modal btn btn-success' data-no='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-share'></i> Sudah Dibeli</button></div></td></tr>");
+                        $('.item-' + data.id).replaceWith("<tr class='item-" + data.id + "'><td class='no'></td><td>" + data.name + "</td><td>" + data.qty + "</td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price + "</td></tr></table></td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price*data.qty + "</td></tr></table><td><script>document.getElementById('st-" + data.id + "').innerHTML = status(" + data.price*data.qty + ",{{Auth::user()->cash+Auth::user()->atm}});</\script><p id='st-" + data.id + "'></p></td><td><div class='btn-group'><button class='edit-modal btn btn-warning btn-sm' data-num='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-edit'></i> Ubah</button><button class='delete-modal btn btn-danger btn-sm' data-no='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-trash'></i> Hapus</button><button class='move-modal btn btn-success btn-sm' data-no='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-share'></i> Sudah Dibeli</button></div></td></tr>");
                     }
                 }
             });

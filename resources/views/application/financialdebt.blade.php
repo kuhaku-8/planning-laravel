@@ -5,8 +5,6 @@
 @endsection
 
 @section('header')
-    <!-- DataTables -->
-    <link rel="stylesheet" href="/dashboard/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <!-- bootstrap datepicker -->
     <link rel="stylesheet" href="/dashboard/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 @endsection
@@ -37,13 +35,13 @@
                     <h3 class="box-title">List Hutang</h3>
                 </div>
                 <div class="box-body">
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#tambah">
+                    <button type="button" class="add-modal btn btn-danger" data-toggle="modal">
                         <i class="fa fa-user-plus"></i> &nbspTambah
                     </button>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="financialdebt" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th>No</th>
@@ -103,27 +101,7 @@
 @section('footer')
     <!-- bootstrap datepicker -->
     <script src="/dashboard/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    <!-- DataTables -->
-    <script src="/dashboard/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="/dashboard/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <!-- InputMask -->
-    <script src="/plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-    <script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
-    <script>
-        $(function () {
-            $('#example1').DataTable()
-            $('#example2').DataTable({
-                'paging'      : true,
-                'lengthChange': false,
-                'searching'   : false,
-                'ordering'    : true,
-                'info'        : true,
-                'autoWidth'   : false
-            })
-        })
-    </script>
-    <!-- Page script -->
+    <script type="text/javascript" src="/other/toastr.min.js"></script>
     <script>
         $(function () {
             //Date picker

@@ -15,12 +15,16 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/financial', 'FinancialController@index');
+Route::resource('/financial', 'FinancialController');
 
-Route::get('/financial-owe', 'FinancialOweController@index');
+Route::resource('/financial-owe', 'FinancialOweController');
 
-Route::get('/financial-debt', 'FinancialDebtController@index');
+Route::resource('/financial-owe-paid', 'FinancialOwePaidController');
+
+Route::resource('/financial-debt', 'FinancialDebtController');
+
+Route::resource('/financial-debt-paid', 'FinancialDebtPaidController');
 
 Route::resource('/item-buy', 'ItemBuyController');
 
-Route::get('/item-history', 'ItemHistoryController@index');
+Route::resource('/item-history', 'ItemHistoryController');

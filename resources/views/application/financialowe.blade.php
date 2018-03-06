@@ -5,10 +5,10 @@
 @endsection
 
 @section('header')
-    <!-- DataTables -->
-    <link rel="stylesheet" href="/dashboard/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <!-- bootstrap datepicker -->
     <link rel="stylesheet" href="/dashboard/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="/other/toastr.min.css">
+    <link rel="stylesheet" href="/other/numbering.css">
 @endsection
 
 @section('menu')
@@ -37,13 +37,13 @@
                     <h3 class="box-title">List Yang Berhutang</h3>
                 </div>
                 <div class="box-body">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tambah">
+                    <button type="button" class="add-modal btn btn-info" data-toggle="modal">
                         <i class="fa fa-user-plus"></i> &nbspTambah
                     </button>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="financialowe" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th>No</th>
@@ -58,16 +58,37 @@
                         <tbody>
                         @foreach ($financialowes as $financialowe)
                         <tr>
-                            <td>{{$no++}}</td>
+                            <td class="no"></td>
                             <td>{{$financialowe->name}}</td>
                             <td>{{$financialowe->status}}</td>
                             <td>{{$financialowe->date}}</td>
-                            <td>{{$financialowe->total}}</td>
-                            <td>{{$financialowe->balance}}<td>
+                            <td>
+                                <table width="90">
+                                    <tr>
+                                        <td>Rp</td>
+                                        <td align="right">{{number_format($financialowe->total,0,',','.')}}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table width="90">
+                                    <tr>
+                                        <td>Rp</td>
+                                        <td align="right">{{number_format($financialowe->balance,0,',','.')}}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
                                 <div class="btn-group">
-                                    <a href="./financial_owe_update.php?id={{$financialowe->id}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> &nbspEdit</a>
-                                    <a href="./financial_owe_delete.php?id={{$financialowe->id}}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Ingin Menghapus {{$financialowe->name}}?')"><i class="fa fa-trash"></i> &nbspDelete</a>
-                                    <a href="./financial_owe_move.php?id={{$financialowe->id}}" class="btn btn-success btn-sm" onclick="return confirm('Yakin {{$financialowe->name}} Sudah Lunas?')"><i class="fa fa-share"></i> &nbspMove</a>
+                                    <button class="edit-modal btn btn-warning btn-sm">
+                                        <i class="fa fa-edit"></i> Ubah
+                                    </button>
+                                    <button class="delete-modal btn btn-danger btn-sm">
+                                        <i class="fa fa-trash"></i> Hapus
+                                    </button>
+                                    <button class="move-modal btn btn-success btn-sm">
+                                        <i class="fa fa-share"></i> Sudah Lunas
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -98,27 +119,7 @@
 @section('footer')
     <!-- bootstrap datepicker -->
     <script src="/dashboard/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    <!-- DataTables -->
-    <script src="/dashboard/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="/dashboard/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <!-- InputMask -->
-    <script src="/plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-    <script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
-    <script>
-        $(function () {
-            $('#example1').DataTable()
-            $('#example2').DataTable({
-                'paging'      : true,
-                'lengthChange': false,
-                'searching'   : false,
-                'ordering'    : true,
-                'info'        : true,
-                'autoWidth'   : false
-            })
-        })
-    </script>
-    <!-- Page script -->
+    <script type="text/javascript" src="/other/toastr.min.js"></script>
     <script>
         $(function () {
             //Date picker
