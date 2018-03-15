@@ -88,44 +88,44 @@
                 </div>
                 <div class="box-body no-padding">
                     <!-- Main content -->
+                    @if((Auth::user()->cash+Auth::user()->atm)>=$itembuy->price)
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="25">No</th>
                             <th>Nama</th>
-                            <th>Qty</th>
+                            <th width="25">Qty</th>
                             <th>Harga</th>
                             <th>Jumlah</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($itembuys as $itembuy)
-                            @if((Auth::user()->cash+Auth::user()->atm+(floor(Auth::user()->paypal)*Auth::user()->conversion))>=$itembuy->price)
-                                <tr>
-                                    <td>{{$nobuy++}}</td>
-                                    <td>{{$itembuy->name}}</td>
-                                    <td>{{$itembuy->qty}}</td>
-                                    <td>
-                                        <table width="90">
-                                            <tr>
-                                                <td>Rp</td>
-                                                <td align="right">{{number_format($itembuy->price,0,',','.')}}</td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table width="90">
-                                            <tr>
-                                                <td>Rp</td>
-                                                <td align="right">{{number_format($itembuy->price*$itembuy->qty,0,',','.')}}</td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            @endif
-                        @endforeach
+                            <tr>
+                                <td align="center">{{$nobuy++}}</td>
+                                <td>{{$itembuy->name}}</td>
+                                <td align="center">{{$itembuy->qty}}</td>
+                                <td>
+                                    <table width="90">
+                                        <tr>
+                                            <td>Rp</td>
+                                            <td align="right">{{number_format($itembuy->price,0,',','.')}}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table width="90">
+                                        <tr>
+                                            <td>Rp</td>
+                                            <td align="right">{{number_format($itembuy->price*$itembuy->qty,0,',','.')}}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
+                    @else
+                        <h4 align="center">Belum Ada!</h4>
+                    @endif
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer" align="center">
@@ -146,19 +146,17 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="25">No</th>
                             <th>Nama</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($itemhistorys as $itemhistory)
-                            @if($nohistory<$nobuy)
-                                <tr>
-                                    <td>{{$nohistory++}}</td>
-                                    <td>{{$itemhistory->name}}</td>
-                                </tr>
-                            @endif
-                        @endforeach
+                        @if($nohistory<2)
+                            <tr>
+                                <td align="center">{{$nohistory++}}</td>
+                                <td>{{$itemhistory->name}}</td>
+                            </tr>
+                        @endif
                         </tbody>
                     </table>
                 </div>

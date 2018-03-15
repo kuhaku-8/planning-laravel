@@ -15,7 +15,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><b>KuhaKu</b> 8</a>
+        <b>KuhaKu</b> 8
     </div>
     <div class="login-box-body">
         <p class="login-box-msg">Login Untuk Memulai Sesi!</p>

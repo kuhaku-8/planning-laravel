@@ -46,19 +46,19 @@
                     <table id="financialowe" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="25">No</th>
                             <th>Nama</th>
                             <th>Status</th>
                             <th>Tanggal (Y-M-D)</th>
                             <th>Jumlah</th>
                             <th>Belum Lunas</th>
-                            <th>Aksi</th>
+                            <th width="300">Aksi</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach ($financialowes as $financialowe)
                         <tr>
-                            <td class="no"></td>
+                            <td align="center" class="no"></td>
                             <td>{{$financialowe->name}}</td>
                             <td>{{$financialowe->status}}</td>
                             <td>{{$financialowe->date}}</td>
@@ -85,6 +85,9 @@
                                     </button>
                                     <button class="delete-modal btn btn-danger btn-sm">
                                         <i class="fa fa-trash"></i> Hapus
+                                    </button>
+                                    <button class="paid-modal btn btn-info btn-sm">
+                                        <i class="fa fa-bookmark"></i> Cicil
                                     </button>
                                     <button class="move-modal btn btn-success btn-sm">
                                         <i class="fa fa-share"></i> Sudah Lunas

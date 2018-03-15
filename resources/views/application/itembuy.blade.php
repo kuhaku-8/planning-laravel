@@ -58,7 +58,7 @@
                         <tr>
                             <th width="25">No</th>
                             <th>Nama</th>
-                            <th>Qty</th>
+                            <th width="25">Qty</th>
                             <th>Harga</th>
                             <th>Jumlah</th>
                             <th>Status</th>
@@ -69,9 +69,9 @@
                         <tbody>
                         @foreach ($itembuys as $itembuy)
                             <tr class="item-{{$itembuy->id}}">
-                                <td class="no"></td>
+                                <td align="center" class="no"></td>
                                 <td>{{$itembuy->name}}</td>
-                                <td>{{$itembuy->qty}}</td>
+                                <td align="center">{{$itembuy->qty}}</td>
                                 <td>
                                     <table width="90">
                                         <tr>
@@ -100,7 +100,7 @@
                                         <button class="delete-modal btn btn-danger btn-sm" data-id="{{$itembuy->id}}" data-name="{{$itembuy->name}}" data-price="{{$itembuy->price}}" data-qty="{{$itembuy->qty}}">
                                             <i class="fa fa-trash"></i> Hapus
                                         </button>
-                                        <button class="move-modal btn btn-success btn-sm" data-id="{{$itembuy->id}}" data-name="{{$itembuy->name}}" data-price="{{$itembuy->price}}" data-qty="{{$itembuy->qty}}">
+                                        <button class="move-modal btn btn-success btn-sm" @if((($itembuy->price*$itembuy->qty)>Auth::user()->cash) && (($itembuy->price*$itembuy->qty)>Auth::user()->atm)) disabled> @else data-iduser="{{Auth::user()->id}}" data-id="{{$itembuy->id}}" data-name="{{$itembuy->name}}" data-price="{{$itembuy->price}}" data-qty="{{$itembuy->qty}}">@endif
                                             <i class="fa fa-share"></i> Sudah Dibeli
                                         </button>
                                     </div>
@@ -198,7 +198,7 @@
                                     <i class="fa fa-inbox"></i>
                                 </div>
                                 <input type="hidden" id="id_edit" disabled>
-                                <input type="text" class="form-control" id="name_edit" value="" autocomplete="off" autofocus>
+                                <input type="text" class="form-control" id="name_edit" autocomplete="off" autofocus>
                             </div>
                             <p class="errorname text-center alert alert-danger hidden"></p>
                         </div>
@@ -310,6 +310,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-inbox"></i>
                                 </div>
+                                <input type="hidden" id="iduser"  disabled>
                                 <input type="hidden" id="id-move" disabled>
                                 <input type="text" class="form-control" id="name_move" disabled>
                             </div>
@@ -339,11 +340,9 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-shopping-cart"></i>
                                 </div>
-                                <select class="form-control" name="buyby" required>
-                                    <option value="">Silahkan Pilih</option>
+                                <select class="form-control" id="via_move" required>
                                     <option value="tunai">Tunai</option>
                                     <option value="atm">ATM</option>
-                                    <option value="paypal">Paypal</option>
                                 </select>
                             </div>
                         </div>
@@ -417,7 +416,7 @@
                         }
                     } else {
                         toastr.success('Barang Ditambahkan!', 'Berhasil!', {timeOut: 5000});
-                        $('#itembuy').append("<tr class='item-" + data.id + "'><td class='no'></td><td>" + data.name + "</td><td>" + data.qty + "</td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price + "</td></tr></table></td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price*data.qty + "</td></tr></table></td><td><script>document.getElementById('st-" + data.id + "').innerHTML = status(" + data.price*data.qty + ",{{Auth::user()->cash+Auth::user()->atm}});</\script><p id='st-" + data.id + "'></p></td><td><div class='btn-group'><button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-edit'></i> Ubah</button><button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-trash'></i> Hapus</button><button class='move-modal btn btn-success btn-sm' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-share'></i> Sudah Dibeli</button></div></td></tr>");
+                        $('#itembuy').append("<tr class='item-" + data.id + "'><td align='center' class='no'></td><td>" + data.name + "</td><td align='center'>" + data.qty + "</td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price + "</td></tr></table></td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price*data.qty + "</td></tr></table></td><td><script>document.getElementById('st-" + data.id + "').innerHTML = status(" + data.price*data.qty + ",{{Auth::user()->cash+Auth::user()->atm}});</\script><p id='st-" + data.id + "'></p></td><td><div class='btn-group'><button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-edit'></i> Ubah</button><button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-trash'></i> Hapus</button><button class='move-modal btn btn-success btn-sm' @if((($itembuy->price*$itembuy->qty)>Auth::user()->cash) && (($itembuy->price*$itembuy->qty)>Auth::user()->atm)) disabled> @else data-iduser='{{Auth::user()->id}}' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'>@endif<i class='fa fa-share'></i> Sudah Dibeli</button></div></td></tr>");
                         $("#addform")[0].reset();
                     }
                 },
@@ -427,11 +426,34 @@
         // Move
         $(document).on('click', '.move-modal', function() {
             $("#moveform")[0].reset();
+            $('#iduser').val($(this).data('iduser'));
             $('#id-move').val($(this).data('id'));
             $('#name_move').val($(this).data('name'));
             $('#price_move').val($(this).data('price'));
             $('#qty_move').val($(this).data('qty'));
+            idmove = $('#id-move').val();
             $('#moveModal').modal('show');
+        });
+        $('.modal-footer').on('click', '.move', function() {
+            $.ajax({
+                type: 'PUT',
+                url: 'item-buy-move/'+ idmove,
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'iduser': $("#iduser").val(),
+                    'id': $("#id-move").val(),
+                    'name': $('#name_move').val(),
+                    'price': $('#price_move').val(),
+                    'qty': $('#qty_move').val(),
+                    // 'via': $('#via_move').val(),
+                    'vendor': "-",
+                    'official_web': "-"
+                },
+                success: function(data) {
+                    toastr.success('Successfully deleted Post!', 'Success Alert', {timeOut: 5000});
+                    $('.item-' + data['id']).remove();
+                }
+            });
         });
 
 
@@ -441,13 +463,13 @@
             $('#name_edit').val($(this).data('name'));
             $('#price_edit').val($(this).data('price'));
             $('#qty_edit').val($(this).data('qty'));
-            id = $('#id_edit').val();
+            idedit = $('#id_edit').val();
             $('#editModal').modal('show');
         });
         $('.modal-footer').on('click', '.edit', function() {
             $.ajax({
                 type: 'PUT',
-                url: 'item-buy/' + id,
+                url: 'item-buy/' + idedit,
                 data: {
                     '_token': $('input[name=_token]').val(),
                     'id': $("#id_edit").val(),
@@ -480,7 +502,7 @@
                         }
                     } else {
                         toastr.success('Successfully updated Post!', 'Success Alert', {timeOut: 5000});
-                        $('.item-' + data.id).replaceWith("<tr class='item-" + data.id + "'><td class='no'></td><td>" + data.name + "</td><td>" + data.qty + "</td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price + "</td></tr></table></td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price*data.qty + "</td></tr></table><td><script>document.getElementById('st-" + data.id + "').innerHTML = status(" + data.price*data.qty + ",{{Auth::user()->cash+Auth::user()->atm}});</\script><p id='st-" + data.id + "'></p></td><td><div class='btn-group'><button class='edit-modal btn btn-warning btn-sm' data-num='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-edit'></i> Ubah</button><button class='delete-modal btn btn-danger btn-sm' data-no='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-trash'></i> Hapus</button><button class='move-modal btn btn-success btn-sm' data-no='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-share'></i> Sudah Dibeli</button></div></td></tr>");
+                        $('.item-' + data.id).replaceWith("<tr class='item-" + data.id + "'><td align='center' class='no'></td><td>" + data.name + "</td><td align='center'>" + data.qty + "</td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price + "</td></tr></table></td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price*data.qty + "</td></tr></table><td><script>document.getElementById('st-" + data.id + "').innerHTML = status(" + data.price*data.qty + ",{{Auth::user()->cash+Auth::user()->atm}});</\script><p id='st-" + data.id + "'></p></td><td><div class='btn-group'><button class='edit-modal btn btn-warning btn-sm' data-num='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-edit'></i> Ubah</button><button class='delete-modal btn btn-danger btn-sm' data-no='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-trash'></i> Hapus</button><button class='move-modal btn btn-success btn-sm' data-no='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-share'></i> Sudah Dibeli</button></div></td></tr>");
                     }
                 }
             });
@@ -493,12 +515,12 @@
             $('#price_delete').val($(this).data('price'));
             $('#qty_delete').val($(this).data('qty'));
             $('#deleteModal').modal('show');
-            id = $('#id_delete').val();
+            iddelete = $('#id_delete').val();
         });
         $('.modal-footer').on('click', '.delete', function() {
             $.ajax({
                 type: 'DELETE',
-                url: 'item-buy/' + id,
+                url: 'item-buy/' + iddelete,
                 data: {
                     '_token': $('input[name=_token]').val(),
                 },

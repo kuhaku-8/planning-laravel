@@ -46,10 +46,10 @@ class HomeController extends Controller
 
         $total=$countowe-$countdebt;
 
-        $itemhistorys = ItemHistory::orderby('id','desc')->get();
-        $itembuys = ItemBuy::orderBy('price', 'asc')->get();
+        $itemhistory = ItemHistory::orderby('id','desc')->first();
+        $itembuy = ItemBuy::orderBy('price', 'asc')->first();
         $no=1;
 
-        return view('home',['debt'=>$debtcount,'owe'=>$owecount,'total'=>$total,'itembuys'=>$itembuys,'itemhistorys'=>$itemhistorys,'nobuy'=>$no,'nohistory'=>$no]);
+        return view('home',['debt'=>$debtcount,'owe'=>$owecount,'total'=>$total,'itembuy'=>$itembuy,'itemhistory'=>$itemhistory,'nobuy'=>$no,'nohistory'=>$no]);
     }
 }

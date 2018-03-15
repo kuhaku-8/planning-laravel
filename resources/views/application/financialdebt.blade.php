@@ -44,34 +44,52 @@
                     <table id="financialdebt" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="25">No</th>
                             <th>Nama</th>
                             <th>Status</th>
                             <th>Tanggal (Y-M-D)</th>
                             <th>Jumlah</th>
                             <th>Lunas</th>
-                            <th>Aksi</th>
+                            <th width="300">Aksi</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach ($financialdebts as $financialdebt)
                         <tr>
-                            <td>{{$no++}}</td>
+                            <td align="center">{{$no++}}</td>
                             <td>{{$financialdebt->name}}</td>
                             <td>{{$financialdebt->status}}</td>
                             <td>{{$financialdebt->date}}</td>
                             <td>
-                                {{$financialdebt->total}}
+                                <table width="90">
+                                    <tr>
+                                        <td>Rp</td>
+                                        <td align="right">{{$financialdebt->total}}</td>
+                                    </tr>
+                                </table>
                             </td>
                             <td>
-                                {{$financialdebt->balance}}
+                                <table width="90">
+                                    <tr>
+                                        <td>Rp</td>
+                                        <td align="right">{{$financialdebt->balance}}</td>
+                                    </tr>
+                                </table>
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="./financial_debt_update.php?id={{$financialdebt->id}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> &nbspUbah</a>
-                                    <a href="./financial_debt_delete.php?id={{$financialdebt->id}}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Ingin Menghapus {{$financialdebt->name}}?')"><i class="fa fa-trash"></i> &nbspHapus</a>
-                                    <a href="./financial_debt_pay.php?id={{$financialdebt->id}}" class="btn btn-info btn-sm"><i class="fa fa-bookmark"></i> &nbspCicil</a>
-                                    <a href="./financial_debt_move.php?id={{$financialdebt->id}}" class="btn btn-success btn-sm" onclick="return confirm('Yakin {{$financialdebt->name}} Sudah Lunas?')"><i class="fa fa-share"></i> &nbspSudah Lunas</a>
+                                    <button class="edit-modal btn btn-warning btn-sm">
+                                        <i class="fa fa-edit"></i> Ubah
+                                    </button>
+                                    <button class="delete-modal btn btn-danger btn-sm">
+                                        <i class="fa fa-trash"></i> Hapus
+                                    </button>
+                                    <button class="paid-modal btn btn-info btn-sm">
+                                        <i class="fa fa-bookmark"></i> Cicil
+                                    </button>
+                                    <button class="move-modal btn btn-success btn-sm">
+                                        <i class="fa fa-share"></i> Sudah Lunas
+                                    </button>
                                 </div>
                             </td>
                         </tr>

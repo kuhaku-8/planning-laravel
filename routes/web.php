@@ -26,5 +26,6 @@ Route::resource('/financial-debt', 'FinancialDebtController');
 Route::resource('/financial-debt-paid', 'FinancialDebtPaidController');
 
 Route::resource('/item-buy', 'ItemBuyController');
+Route::put('/item-buy-move/{id}', 'ItemBuyController@move');
 
 Route::resource('/item-history', 'ItemHistoryController');

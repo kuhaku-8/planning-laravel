@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Validator;
@@ -9,6 +10,7 @@ use Response;
 use View;
 
 use App\Model\ItemBuy;
+use App\Model\ItemHistory;
 
 class ItemBuyController extends Controller
 {
@@ -44,11 +46,34 @@ class ItemBuyController extends Controller
         }
     }
 
-    public function move($id)
+    public function move(Request $request, $id)
     {
-        $itembuy = ItemBuy::findOrFail($id);
+//        $user = User::findOrFail($request->iduser);
+//        if($request->via="atm"){
+//            $user->atm = $user->atm-($request->price*$request->qty);
+//        }
+//        else if($request->via="tunai") {
+//            $user->cash = $user->cash-($request->price*$request->qty);
+//        }
+//        $user->save();
 
-        return view('application.itembuy', ['itembuy' => $itembuy]);
+        $validator = Validator::make(Input::all(), $this->rules);
+        if ($validator->fails()) {
+            return Response::json(array('errors' => $validator->getMessageBag()->toArray()));
+        } else {
+            $itemhistory = new ItemHistory();
+            $itemhistory->name = $request->name;
+            $itemhistory->price = $request->price;
+            $itemhistory->qty = $request->qty;
+            $itemhistory->vendor = $request->vendor;
+            $itemhistory->official_web = $request->official_web;
+            $itemhistory->save();
+        }
+
+        $itembuy = ItemBuy::findOrFail($id);
+        $itembuy->delete();
+
+        return response()->json($itembuy);
     }
 
     public function update(Request $request, $id)

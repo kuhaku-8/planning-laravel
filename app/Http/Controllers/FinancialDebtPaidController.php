@@ -14,7 +14,7 @@ class FinancialDebtPaidController extends Controller
     }
 
     public function index(){
-        $financialdebtpaids=FinancialDebtPaid::all();
+        $financialdebtpaids=FinancialDebtPaid::orderBy('id','desc')->get();
         $no=1;
         return view('/application/financialdebtpaid',['financialdebtpaids'=>$financialdebtpaids,'no'=>$no]);
     }

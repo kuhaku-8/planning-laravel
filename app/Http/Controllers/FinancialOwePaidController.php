@@ -14,7 +14,7 @@ class FinancialOwePaidController extends Controller
     }
 
     public function index(){
-        $financialowepaids=FinancialOwePaid::all();
+        $financialowepaids=FinancialOwePaid::orderBy('id','desc')->get();
         $no=1;
         return view('/application/financialowepaid',['financialowepaids'=>$financialowepaids,'no'=>$no]);
     }
