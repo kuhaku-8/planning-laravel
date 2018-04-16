@@ -13,19 +13,22 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::resource('/', 'HomeController');
 
-Route::resource('/financial', 'FinancialController');
+Route::resource('financial', 'FinancialController');
 
-Route::resource('/financial-owe', 'FinancialOweController');
+Route::resource('profit', 'ProfitController');
 
-Route::resource('/financial-owe-paid', 'FinancialOwePaidController');
+Route::resource('financial-owe', 'FinancialOweController');
 
-Route::resource('/financial-debt', 'FinancialDebtController');
+Route::resource('financial-owe-paid', 'FinancialOwePaidController');
 
-Route::resource('/financial-debt-paid', 'FinancialDebtPaidController');
+Route::resource('financial-debt', 'FinancialDebtController');
+Route::put('financial-debt/{id}', 'FinancialDebtController@move');
 
-Route::resource('/item-buy', 'ItemBuyController');
-Route::put('/item-buy-move/{id}', 'ItemBuyController@move');
+Route::resource('financial-debt-paid', 'FinancialDebtPaidController');
 
-Route::resource('/item-history', 'ItemHistoryController');
+Route::resource('item-buy', 'ItemBuyController');
+Route::put('item-buy-move/{id}', 'ItemBuyController@move');
+
+Route::resource('item-history', 'ItemHistoryController');

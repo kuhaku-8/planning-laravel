@@ -14,10 +14,13 @@ class FinancialDebtController extends Controller
         $this->middleware('auth');
     }
 
+    protected $rules=[
+        'name' => 'required|min:5',
+        'total' => 'required|min:500|numeric'
+    ];
+
     public function index(){
         $financialdebts=FinancialDebt::all();
-        $no=1;
-        //dd($itemhistory);
-        return view('/application/financialdebt',['financialdebts'=>$financialdebts,'no'=>$no]);
+        return view('application.financialdebt',['financialdebts'=>$financialdebts]);
     }
 }

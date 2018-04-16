@@ -49,7 +49,7 @@
                         <tbody>
                         @foreach ($financialdebtpaids as $financialdebtpaid)
                             <tr>
-                                <td>{{$no++}}</td>
+                                <td align="center">{{$no++}}</td>
                                 <td>{{$financialdebtpaid->name}}</td>
                                 <td>{{$financialdebtpaid->status}}</td>
                                 <td>{{$financialdebtpaid->date}}</td>

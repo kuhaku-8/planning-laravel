@@ -35,6 +35,6 @@ class FinancialController extends Controller
             $counthave+=$have->price*$have->qty;
         }
 
-        return view('application/financial',['totaldebt'=>$countdebt,'totalowe'=>$countowe,'totalhave'=>$counthave]);
+        return view('application.financial',['totaldebt'=>$countdebt,'totalowe'=>$countowe,'totalhave'=>$counthave]);
     }
 }

@@ -84,11 +84,10 @@
             <!-- Default box -->
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Barang <small>Dapat Dibeli Sekarang</small></h3>
+                    <h3 class="box-title">Barang <small>Akan Dibeli</small></h3>
                 </div>
                 <div class="box-body no-padding">
                     <!-- Main content -->
-                    @if((Auth::user()->cash+Auth::user()->atm)>=$itembuy->price)
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -123,9 +122,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    @else
-                        <h4 align="center">Belum Ada!</h4>
-                    @endif
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer" align="center">

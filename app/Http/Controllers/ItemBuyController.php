@@ -48,28 +48,26 @@ class ItemBuyController extends Controller
 
     public function move(Request $request, $id)
     {
-//        $user = User::findOrFail($request->iduser);
-//        if($request->via="atm"){
-//            $user->atm = $user->atm-($request->price*$request->qty);
-//        }
-//        else if($request->via="tunai") {
-//            $user->cash = $user->cash-($request->price*$request->qty);
-//        }
-//        $user->save();
+        //buat di table itemhistory
+        $itemhistory = new ItemHistory();
+        $itemhistory->name = $request->name;
+        $itemhistory->price = $request->price;
+        $itemhistory->qty = $request->qty;
+        $itemhistory->vendor = $request->vendor;
+        $itemhistory->official_web = $request->official_web;
+        $itemhistory->save();
 
-        $validator = Validator::make(Input::all(), $this->rules);
-        if ($validator->fails()) {
-            return Response::json(array('errors' => $validator->getMessageBag()->toArray()));
-        } else {
-            $itemhistory = new ItemHistory();
-            $itemhistory->name = $request->name;
-            $itemhistory->price = $request->price;
-            $itemhistory->qty = $request->qty;
-            $itemhistory->vendor = $request->vendor;
-            $itemhistory->official_web = $request->official_web;
-            $itemhistory->save();
+        //kurangi uang user
+        $user = User::findOrFail($request->iduser);
+        if($request->via=="atm"){
+            $user->atm = $user->atm-($request->price*$request->qty);
         }
+        else if($request->via=="tunai") {
+            $user->cash = $user->cash-($request->price*$request->qty);
+        }
+        $user->save();
 
+        //hapus di table itembuy
         $itembuy = ItemBuy::findOrFail($id);
         $itembuy->delete();
 

@@ -48,7 +48,7 @@
                 </div>
                 <div class="box-body">
                     <button type="button" class="add-modal btn btn-info" data-toggle="modal">
-                        <i class="fa fa-cart-plus"></i> &nbspTambah
+                        <i class="fa fa-cart-plus"></i> Tambah
                     </button>
                 </div>
                 <!-- /.box-header -->
@@ -133,7 +133,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="fa fa-cart-plus"></i> &nbspTambahkan Barang</h4>
+                    <h4 class="modal-title"><i class="fa fa-cart-plus"></i> Tambahkan Barang</h4>
                 </div>
                 <form role="form" action="#" method="post" id="addform">
                     <div class="modal-body">
@@ -187,7 +187,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="fa fa-edit"></i> &nbspUbah Barang</h4>
+                    <h4 class="modal-title"><i class="fa fa-edit"></i> Ubah Barang</h4>
                 </div>
                 <form role="form" action="#" method="post">
                     <div class="modal-body">
@@ -242,7 +242,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="fa fa-trash"></i> &nbspHapus Barang</h4>
+                    <h4 class="modal-title"><i class="fa fa-trash"></i> Hapus Barang</h4>
                 </div>
                 <form role="form" action="#" method="post">
                     <div class="modal-body">
@@ -297,7 +297,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="fa fa-share"></i> &nbspSudah Dibeli</h4>
+                    <h4 class="modal-title"><i class="fa fa-share"></i> Sudah Dibeli</h4>
                 </div>
                 <form role="form" action="#" method="post" id="moveform">
                     <div class="modal-body">
@@ -399,7 +399,7 @@
                     if ((data.errors)) {
                         setTimeout(function () {
                             $('#addModal').modal('show');
-                            toastr.error('Validation error!', 'Error Alert', {timeOut: 5000});
+                            toastr.error('Data Masukkan Salah!', 'Gagal Menambahkan Data!', {timeOut: 5000});
                         }, 500);
 
                         if (data.errors.name) {
@@ -416,7 +416,7 @@
                         }
                     } else {
                         toastr.success('Barang Ditambahkan!', 'Berhasil!', {timeOut: 5000});
-                        $('#itembuy').append("<tr class='item-" + data.id + "'><td align='center' class='no'></td><td>" + data.name + "</td><td align='center'>" + data.qty + "</td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price + "</td></tr></table></td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price*data.qty + "</td></tr></table></td><td><script>document.getElementById('st-" + data.id + "').innerHTML = status(" + data.price*data.qty + ",{{Auth::user()->cash+Auth::user()->atm}});</\script><p id='st-" + data.id + "'></p></td><td><div class='btn-group'><button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-edit'></i> Ubah</button><button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-trash'></i> Hapus</button><button class='move-modal btn btn-success btn-sm' @if((($itembuy->price*$itembuy->qty)>Auth::user()->cash) && (($itembuy->price*$itembuy->qty)>Auth::user()->atm)) disabled> @else data-iduser='{{Auth::user()->id}}' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'>@endif<i class='fa fa-share'></i> Sudah Dibeli</button></div></td></tr>");
+                        $('#itembuy').append("<tr class='item-" + data.id + "'><td align='center' class='no'></td><td>" + data.name + "</td><td align='center'>" + data.qty + "</td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price + "</td></tr></table></td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price*data.qty + "</td></tr></table></td><td><script>document.getElementById('st-" + data.id + "').innerHTML = status(" + data.price*data.qty + ",{{Auth::user()->cash+Auth::user()->atm}});</\script><p id='st-" + data.id + "'></p></td><td><div class='btn-group'><button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-edit'></i> Ubah</button><button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-trash'></i> Hapus</button><button class='move-modal btn btn-success btn-sm' disabled><i class='fa fa-share'></i> Sudah Dibeli</button></div></td></tr>");
                         $("#addform")[0].reset();
                     }
                 },
@@ -431,13 +431,13 @@
             $('#name_move').val($(this).data('name'));
             $('#price_move').val($(this).data('price'));
             $('#qty_move').val($(this).data('qty'));
-            idmove = $('#id-move').val();
+            id = $('#id-move').val();
             $('#moveModal').modal('show');
         });
         $('.modal-footer').on('click', '.move', function() {
             $.ajax({
                 type: 'PUT',
-                url: 'item-buy-move/'+ idmove,
+                url: 'item-buy-move/'+ id,
                 data: {
                     '_token': $('input[name=_token]').val(),
                     'iduser': $("#iduser").val(),
@@ -445,12 +445,12 @@
                     'name': $('#name_move').val(),
                     'price': $('#price_move').val(),
                     'qty': $('#qty_move').val(),
-                    // 'via': $('#via_move').val(),
+                    'via': $('#via_move').val(),
                     'vendor': "-",
                     'official_web': "-"
                 },
                 success: function(data) {
-                    toastr.success('Successfully deleted Post!', 'Success Alert', {timeOut: 5000});
+                    toastr.success('Barang Sudah Dibeli!', 'Berhasil!', {timeOut: 5000});
                     $('.item-' + data['id']).remove();
                 }
             });
@@ -463,13 +463,13 @@
             $('#name_edit').val($(this).data('name'));
             $('#price_edit').val($(this).data('price'));
             $('#qty_edit').val($(this).data('qty'));
-            idedit = $('#id_edit').val();
+            id = $('#id_edit').val();
             $('#editModal').modal('show');
         });
         $('.modal-footer').on('click', '.edit', function() {
             $.ajax({
                 type: 'PUT',
-                url: 'item-buy/' + idedit,
+                url: 'item-buy/' + id,
                 data: {
                     '_token': $('input[name=_token]').val(),
                     'id': $("#id_edit").val(),
@@ -485,7 +485,7 @@
                     if ((data.errors)) {
                         setTimeout(function () {
                             $('#editModal').modal('show');
-                            toastr.error('Validation error!', 'Error Alert', {timeOut: 5000});
+                            toastr.error('Data Masukkan Salah!', 'Gagal Mengubah Data!', {timeOut: 5000});
                         }, 500);
 
                         if (data.errors.name) {
@@ -501,8 +501,8 @@
                             $('.errorqty').text(data.errors.qty);
                         }
                     } else {
-                        toastr.success('Successfully updated Post!', 'Success Alert', {timeOut: 5000});
-                        $('.item-' + data.id).replaceWith("<tr class='item-" + data.id + "'><td align='center' class='no'></td><td>" + data.name + "</td><td align='center'>" + data.qty + "</td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price + "</td></tr></table></td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price*data.qty + "</td></tr></table><td><script>document.getElementById('st-" + data.id + "').innerHTML = status(" + data.price*data.qty + ",{{Auth::user()->cash+Auth::user()->atm}});</\script><p id='st-" + data.id + "'></p></td><td><div class='btn-group'><button class='edit-modal btn btn-warning btn-sm' data-num='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-edit'></i> Ubah</button><button class='delete-modal btn btn-danger btn-sm' data-no='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-trash'></i> Hapus</button><button class='move-modal btn btn-success btn-sm' data-no='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-share'></i> Sudah Dibeli</button></div></td></tr>");
+                        toastr.success('Barang Diubah!', 'Berhasil!', {timeOut: 5000});
+                        $('.item-' + data.id).replaceWith("<tr class='item-" + data.id + "'><td align='center' class='no'></td><td>" + data.name + "</td><td align='center'>" + data.qty + "</td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price + "</td></tr></table></td><td><table width='90'><tr><td>Rp</td><td align='right'>" + data.price*data.qty + "</td></tr></table><td><script>document.getElementById('st-" + data.id + "').innerHTML = status(" + data.price*data.qty + ",{{Auth::user()->cash+Auth::user()->atm}});</\script><p id='st-" + data.id + "'></p></td><td><div class='btn-group'><button class='edit-modal btn btn-warning btn-sm' data-num='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-edit'></i> Ubah</button><button class='delete-modal btn btn-danger btn-sm' data-no='" + data.no +"' data-id='" + data.id + "' data-name='" + data.name + "' data-price='" + data.price + "' data-qty='" + data.qty + "'><i class='fa fa-trash'></i> Hapus</button><button class='move-modal btn btn-success btn-sm' disabled><i class='fa fa-share'></i> Sudah Dibeli</button></div></td></tr>");
                     }
                 }
             });
@@ -515,17 +515,17 @@
             $('#price_delete').val($(this).data('price'));
             $('#qty_delete').val($(this).data('qty'));
             $('#deleteModal').modal('show');
-            iddelete = $('#id_delete').val();
+            id = $('#id_delete').val();
         });
         $('.modal-footer').on('click', '.delete', function() {
             $.ajax({
                 type: 'DELETE',
-                url: 'item-buy/' + iddelete,
+                url: 'item-buy/' + id,
                 data: {
                     '_token': $('input[name=_token]').val(),
                 },
                 success: function(data) {
-                    toastr.success('Successfully deleted Post!', 'Success Alert', {timeOut: 5000});
+                    toastr.success('Barang Dihapus!', 'Berhasil!', {timeOut: 5000});
                     $('.item-' + data['id']).remove();
                 }
             });

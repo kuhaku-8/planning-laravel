@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@yield('title')</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="/dashboard/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/dashboard/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/dashboard/Ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
-    <link rel="stylesheet" href="/other/css.css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" href="dashboard/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="dashboard/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="dashboard/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="other/css.css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     @yield('header')
-    <link href='/pictures/ico.png' rel='icon' type='image/x-icon'/>
+    <link href='pictures/ico.png' rel='icon' type='image/x-icon'/>
 </head>
 <body class="hold-transition skin-blue fixed sidebar-mini">
 <div class="wrapper">
@@ -58,13 +58,13 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="/pictures/profil/{{Auth::user()->id}}.jpg" class="user-image" alt="User Image">
+                            <img src="pictures/profil/{{Auth::user()->id}}.jpg" class="user-image" alt="User Image">
                             <span class="hidden-xs">{{Auth::user()->nickname}}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="/pictures/profil/{{Auth::user()->id}}.jpg" class="img-circle" alt="User Image">
+                                <img src="pictures/profil/{{Auth::user()->id}}.jpg" class="img-circle" alt="User Image">
                                 <p>
                                     {{Auth::user()->name}}
                                     <small>Admin</small>
@@ -73,10 +73,10 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="/profile" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="profile" class="btn btn-default btn-flat">Profil</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign out</a>
+                                    <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Keluar</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
                                 </div>
                             </li>
@@ -95,7 +95,7 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="/pictures/profil/{{Auth::user()->id}}.jpg" class="img-circle" alt="User Image">
+                    <img src="pictures/profil/{{Auth::user()->id}}.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <p>{{Auth::user()->name}}</p>
@@ -106,8 +106,8 @@
             @yield('menu')
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">KEUANGAN</li>
-                <li><a href="/financial"><i class="fa fa-balance-scale"></i><span>Dimiliki</span></a></li>
-                <li><a href="/profit"><i class="fa fa-line-chart"></i><span>Keuntungan Penjualan</span></a></li>
+                <li><a href="financial"><i class="fa fa-balance-scale"></i><span>Dimiliki</span></a></li>
+                <li><a href="profit"><i class="fa fa-line-chart"></i><span>Keuntungan Penjualan</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-users"></i><span>Daftar Yang Berhutang</span>
                         <span class="pull-right-container">
@@ -115,8 +115,8 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/financial-owe"><i class="fa fa-th-list"></i> Lihat</a></li>
-                        <li><a href="/financial-owe-paid"><i class="fa fa-check"></i> Sudah Lunas</a></li>
+                        <li><a href="financial-owe"><i class="fa fa-th-list"></i> Lihat</a></li>
+                        <li><a href="financial-owe-paid"><i class="fa fa-check"></i> Sudah Lunas</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -126,18 +126,18 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/financial-debt"><i class="fa fa-th-list"></i> Lihat</a></li>
-                        <li><a href="/financial-debt-paid"><i class="fa fa-check"></i> Sudah Lunas</a></li>
+                        <li><a href="financial-debt"><i class="fa fa-th-list"></i> Lihat</a></li>
+                        <li><a href="financial-debt-paid"><i class="fa fa-check"></i> Sudah Lunas</a></li>
                     </ul>
                 </li>
                 <li class="header">BARANG</li>
                 <li>
-                    <a href="/item-buy">
+                    <a href="item-buy">
                         <i class="fa fa-tasks"></i> <span>Barang Akan Dibeli</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/item-history">
+                    <a href="item-history">
                         <i class="fa fa-check-circle"></i> <span>Barang Sudah Dibeli</span>
                     </a>
                 </li>
@@ -167,15 +167,15 @@
         <strong>Copyright &copy; 2018 <a href="http://kuhaku8.blogspot.com">KuhaKu 8 Studio</a>.</strong> All rights reserved.
     </footer>
     <!-- jQuery 3 -->
-    <script src="/dashboard/jquery/dist/jquery.min.js"></script>
+    <script src="dashboard/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="/dashboard/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="dashboard/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- SlimScroll -->
-    <script src="/dashboard/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="dashboard/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
-    <script src="/dashboard/fastclick/lib/fastclick.js"></script>
+    <script src="dashboard/fastclick/lib/fastclick.js"></script>
     <!-- AdminLTE App -->
-    <script src="/dist/js/adminlte.min.js"></script>
+    <script src="dist/js/adminlte.min.js"></script>
     @yield('footer')
 </body>
 </html>
